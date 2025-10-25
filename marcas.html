@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcas | Control + Tienda</title>
+    <meta name="description" content="Descubre las mejores marcas de laptops en Control + Tienda. Tecnología de punta de los fabricantes más reconocidos mundialmente.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        background: 'hsl(0 0% 100%)',
+                        foreground: 'hsl(215 25% 15%)',
+                        primary: {
+                            DEFAULT: 'hsl(215 85% 16%)',
+                            foreground: 'hsl(0 0% 100%)',
+                        },
+                        secondary: {
+                            DEFAULT: 'hsl(210 100% 97%)',
+                            foreground: 'hsl(215 85% 16%)',
+                        },
+                        accent: {
+                            DEFAULT: 'hsl(195 100% 50%)',
+                            foreground: 'hsl(0 0% 100%)',
+                        },
+                        muted: {
+                            DEFAULT: 'hsl(210 40% 96%)',
+                            foreground: 'hsl(215 16% 47%)',
+                        },
+                        border: 'hsl(215 20% 90%)',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: hsl(0 0% 100%);
+            color: hsl(215 25% 15%);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gradient-hero {
+            background: linear-gradient(135deg, hsl(215 85% 16%) 0%, hsl(215 70% 25%) 100%);
+        }
+
+        .shadow-card {
+            box-shadow: 0 4px 24px -2px hsl(215 25% 15% / 0.08);
+        }
+
+        .shadow-hover:hover {
+            box-shadow: 0 8px 32px -4px hsl(215 25% 15% / 0.12);
+        }
+
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+
+        .brand-card {
+            transition: all 0.3s ease;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .brand-logo {
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .brand-card:hover .brand-logo {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-background border-b border-border">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="font-display font-bold text-2xl">
+                        Control + <span class="text-accent">Tienda</span>
+                    </a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="laptops.html" class="text-sm font-medium hover:text-accent transition-smooth">Laptops</a>
+                        <a href="#" class="text-sm font-medium hover:text-accent transition-smooth">Ofertas</a>
+                        <a href="marcas.html" class="text-sm font-medium text-accent transition-smooth">Marcas</a>
+                        <a href="soporte.html" class="text-sm font-medium hover:text-accent transition-smooth">Soporte</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="hidden md:inline-flex items-center justify-center h-10 px-4 text-sm font-medium hover:bg-muted rounded-md transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                    </button>
+                    <button class="hidden md:inline-flex items-center justify-center h-10 px-4 text-sm font-medium hover:bg-muted rounded-md transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="8" cy="21" r="1"></circle>
+                            <circle cx="19" cy="21" r="1"></circle>
+                            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                        </svg>
+                    </button>
+                    <button id="mobile-menu-btn" class="md:hidden inline-flex items-center justify-center h-10 w-10 hover:bg-muted rounded-md transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" x2="20" y1="12" y2="12"></line>
+                            <line x1="4" x2="20" y1="6" y2="6"></line>
+                            <line x1="4" x2="20" y1="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="py-4 space-y-3">
+                    <a href="laptops.html" class="block px-4 py-2 text-sm font-medium hover:bg-muted rounded-md transition-smooth">Laptops</a>
+                    <a href="#" class="block px-4 py-2 text-sm font-medium hover:bg-muted rounded-md transition-smooth">Ofertas</a>
+                    <a href="marcas.html" class="block px-4 py-2 text-sm font-medium text-accent bg-muted rounded-md transition-smooth">Marcas</a>
+                    <a href="soporte.html" class="block px-4 py-2 text-sm font-medium hover:bg-muted rounded-md transition-smooth">Soporte</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 gradient-hero text-white overflow-hidden">
+        <div class="absolute inset-0 bg-[url('src/assets/brands-hero.jpg')] bg-cover bg-center opacity-10"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6 border border-white/20">
+                    🏆 Marcas Premium
+                </div>
+                <h1 class="text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
+                    Las Mejores <span class="text-accent">Marcas</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed">
+                    Trabajamos con los fabricantes más reconocidos a nivel mundial para ofrecerte tecnología de última generación y calidad garantizada.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg transition-smooth shadow-lg">
+                        Ver Catálogo Completo
+                    </button>
+                    <button class="inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg border border-white/20 backdrop-blur-sm transition-smooth">
+                        Comparar Marcas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Grid Section -->
+    <section class="py-20 bg-background">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Nuestras Marcas</h2>
+                <p class="text-xl text-muted-foreground">Descubre la excelencia tecnológica de cada fabricante</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Apple -->
+                <div class="brand-card bg-card rounded-xl p-8 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-24 w-24 rounded-full bg-gray-100 flex items-center justify-center mb-6 mx-auto group-hover:bg-gray-200 transition-smooth">
+                        <img src="src/assets/apple-logo.png" alt="Apple" class="brand-logo h-12 w-12">
+                    </div>
+                    <h3 class="font-display font-semibold text-2xl mb-3">Apple</h3>
+                    <p class="text-muted-foreground mb-4">Innovación y diseño premium con los MacBook Pro y Air</p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Premium</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Creativos</span>
+                    </div>
+                    <div class="text-sm text-muted-foreground mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Precio desde:</span>
+                            <span class="font-semibold">S/ 5,999</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Modelos:</span>
+                            <span class="font-semibold">12+</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-smooth">
+                        Ver MacBooks
+                    </button>
+                </div>
+
+                <!-- Dell -->
+                <div class="brand-card bg-card rounded-xl p-8 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-24 w-24 rounded-full bg-blue-50 flex items-center justify-center mb-6 mx-auto group-hover:bg-blue-100 transition-smooth">
+                        <img src="src/assets/dell-logo.png" alt="Dell" class="brand-logo h-12 w-12">
+                    </div>
+                    <h3 class="font-display font-semibold text-2xl mb-3">Dell</h3>
+                    <p class="text-muted-foreground mb-4">Rendimiento empresarial y gaming con XPS, Latitude y Alienware</p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-medium rounded-full">Empresarial</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Gaming</span>
+                    </div>
+                    <div class="text-sm text-muted-foreground mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Precio desde:</span>
+                            <span class="font-semibold">S/ 2,899</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Modelos:</span>
+                            <span class="font-semibold">25+</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-smooth">
+                        Ver Laptops Dell
+                    </button>
+                </div>
+
+                <!-- HP -->
+                <div class="brand-card bg-card rounded-xl p-8 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-24 w-24 rounded-full bg-blue-50 flex items-center justify-center mb-6 mx-auto group-hover:bg-blue-100 transition-smooth">
+                        <img src="src/assets/hp-logo.png" alt="HP" class="brand-logo h-12 w-12">
+                    </div>
+                    <h3 class="font-display font-semibold text-2xl mb-3">HP</h3>
+                    <p class="text-muted-foreground mb-4">Versatilidad y calidad con Spectre, Envy y series Pavilion</p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Todo Uso</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Calidad</span>
+                    </div>
+                    <div class="text-sm text-muted-foreground mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Precio desde:</span>
+                            <span class="font-semibold">S/ 2,199</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Modelos:</span>
+                            <span class="font-semibold">30+</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-smooth">
+                        Ver Laptops HP
+                    </button>
+                </div>
+
+                <!-- Lenovo -->
+                <div class="brand-card bg-card rounded-xl p-8 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-24 w-24 rounded-full bg-red-50 flex items-center justify-center mb-6 mx-auto group-hover:bg-red-100 transition-smooth">
+                        <img src="src/assets/lenovo-logo.png" alt="Lenovo" class="brand-logo h-12 w-12">
+                    </div>
+                    <h3 class="font-display font-semibold text-2xl mb-3">Lenovo</h3>
+                    <p class="text-muted-foreground mb-4">Innovación en ThinkPad, Yoga y Legion para todos los usuarios</p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">Empresarial</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded-full">Innovación</span>
+                    </div>
+                    <div class="text-sm text-muted-foreground mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Precio desde:</span>
+                            <span class="font-semibold">S/ 2,499</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Modelos:</span>
+                            <span class="font-semibold">28+</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-smooth">
+                        Ver Laptops Lenovo
+                    </button>
+                </div>
+
+                <!-- ASUS -->
+                <div class="brand-card bg-card rounded-xl p-8 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-24 w-24 rounded-full bg-black flex items-center justify-center mb-6 mx-auto group-hover:bg-gray-800 transition-smooth">
+                        <img src="src/assets/asus-logo.png" alt="ASUS" class="brand-logo h-12 w-12">
+                    </div>
+                    <h3 class="font-display font-semibold text-2xl mb-3">ASUS</h3>
+                    <p class="text-muted-foreground mb-4">Líder en gaming con ROG y excelencia en ZenBook y Vivobook</p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Gaming</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">Ultrabooks</span>
+                    </div>
+                    <div class="text-sm text-muted-foreground mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Precio desde:</span>
+                            <span class="font-semibold">S/ 2,299</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Modelos:</span>
+                            <span class="font-semibold">22+</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-smooth">
+                        Ver Laptops ASUS
+                    </button>
+                </div>
+
+                <!-- MSI -->
+                <div class="brand-card bg-card rounded-xl p-8 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-24 w-24 rounded-full bg-red-50 flex items-center justify-center mb-6 mx-auto group-hover:bg-red-100 transition-smooth">
+                        <img src="src/assets/msi-logo.png" alt="MSI" class="brand-logo h-12 w-12">
+                    </div>
+                    <h3 class="font-display font-semibold text-2xl mb-3">MSI</h3>
+                    <p class="text-muted-foreground mb-4">Especialistas en gaming y creación de contenido de alto rendimiento</p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="px-3 py-1 bg-red-100 text-red-800 text-xs font-medium rounded-full">Gaming</span>
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">Rendimiento</span>
+                    </div>
+                    <div class="text-sm text-muted-foreground mb-4">
+                        <div class="flex justify-between mb-1">
+                            <span>Precio desde:</span>
+                            <span class="font-semibold">S/ 3,999</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Modelos:</span>
+                            <span class="font-semibold">15+</span>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg transition-smooth">
+                        Ver Laptops MSI
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Comparison Section -->
+    <section class="py-20 bg-muted">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Comparativa de Marcas</h2>
+                <p class="text-xl text-muted-foreground">Encuentra la marca perfecta para tus necesidades</p>
+            </div>
+
+            <div class="max-w-6xl mx-auto overflow-x-auto">
+                <table class="w-full bg-card rounded-xl shadow-card overflow-hidden">
+                    <thead>
+                        <tr class="bg-primary text-primary-foreground">
+                            <th class="px-6 py-4 text-left font-display font-semibold">Marca</th>
+                            <th class="px-6 py-4 text-center font-display font-semibold">Enfoque Principal</th>
+                            <th class="px-6 py-4 text-center font-display font-semibold">Precio Inicial</th>
+                            <th class="px-6 py-4 text-center font-display font-semibold">Garantía</th>
+                            <th class="px-6 py-4 text-center font-display font-semibold">Puntuación</th>
+                            <th class="px-6 py-4 text-center font-display font-semibold">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-border">
+                        <tr class="hover:bg-muted/50 transition-smooth">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="src/assets/apple-logo.png" alt="Apple" class="h-8 w-8 mr-3">
+                                    <span class="font-semibold">Apple</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">Creativos & Premium</span>
+                            </td>
+                            <td class="px-6 py-4 text-center font-semibold">S/ 5,999</td>
+                            <td class="px-6 py-4 text-center">1 año estándar</td>
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex justify-center">
+                                    <span class="text-yellow-400">★★★★★</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="px-4 py-2 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-smooth text-sm">
+                                    Explorar
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-muted/50 transition-smooth">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="src/assets/dell-logo.png" alt="Dell" class="h-8 w-8 mr-3">
+                                    <span class="font-semibold">Dell</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">Empresarial & Gaming</span>
+                            </td>
+                            <td class="px-6 py-4 text-center font-semibold">S/ 2,899</td>
+                            <td class="px-6 py-4 text-center">1-3 años</td>
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex justify-center">
+                                    <span class="text-yellow-400">★★★★☆</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="px-4 py-2 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-smooth text-sm">
+                                    Explorar
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-muted/50 transition-smooth">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="src/assets/hp-logo.png" alt="HP" class="h-8 w-8 mr-3">
+                                    <span class="font-semibold">HP</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Versátil & Calidad</span>
+                            </td>
+                            <td class="px-6 py-4 text-center font-semibold">S/ 2,199</td>
+                            <td class="px-6 py-4 text-center">1-2 años</td>
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex justify-center">
+                                    <span class="text-yellow-400">★★★★☆</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="px-4 py-2 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-smooth text-sm">
+                                    Explorar
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-muted/50 transition-smooth">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="src/assets/lenovo-logo.png" alt="Lenovo" class="h-8 w-8 mr-3">
+                                    <span class="font-semibold">Lenovo</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-3 py-1 bg-gray-100 text-gray-800 text-sm font-medium rounded-full">Innovación & Empresa</span>
+                            </td>
+                            <td class="px-6 py-4 text-center font-semibold">S/ 2,499</td>
+                            <td class="px-6 py-4 text-center">1-3 años</td>
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex justify-center">
+                                    <span class="text-yellow-400">★★★★☆</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="px-4 py-2 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-smooth text-sm">
+                                    Explorar
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-muted/50 transition-smooth">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="src/assets/asus-logo.png" alt="ASUS" class="h-8 w-8 mr-3">
+                                    <span class="font-semibold">ASUS</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">Gaming & Ultrabooks</span>
+                            </td>
+                            <td class="px-6 py-4 text-center font-semibold">S/ 2,299</td>
+                            <td class="px-6 py-4 text-center">1-2 años</td>
+                            <td class="px-6 py-4 text-center">
+                                <div class="flex justify-center">
+                                    <span class="text-yellow-400">★★★★☆</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="px-4 py-2 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-smooth text-sm">
+                                    Explorar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Features Section -->
+    <section class="py-20 bg-background">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Características por Marca</h2>
+                <p class="text-xl text-muted-foreground">Descubre lo que hace única a cada marca</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth">
+                    <div class="flex items-center mb-4">
+                        <img src="src/assets/apple-logo.png" alt="Apple" class="h-10 w-10 mr-3">
+                        <h3 class="font-display font-semibold text-xl">Apple</h3>
+                    </div>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Sistema operativo macOS optimizado</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Chip M1/M2 con máximo rendimiento</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Pantallas Retina de alta calidad</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Ecosistema integrado con otros dispositivos Apple</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Diseño premium y construcción de aluminio</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth">
+                    <div class="flex items-center mb-4">
+                        <img src="src/assets/dell-logo.png" alt="Dell" class="h-10 w-10 mr-3">
+                        <h3 class="font-display font-semibold text-xl">Dell</h3>
+                    </div>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Servicio de soporte premium</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Durabilidad y confiabilidad empresarial</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Tecnología gaming avanzada con Alienware</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Diseños ultradelgados en serie XPS</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Amplia personalización de componentes</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth">
+                    <div class="flex items-center mb-4">
+                        <img src="src/assets/hp-logo.png" alt="HP" class="h-10 w-10 mr-3">
+                        <h3 class="font-display font-semibold text-xl">HP</h3>
+                    </div>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Amplia gama para todos los presupuestos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Innovación en diseño y materiales</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Tecnología de seguridad avanzada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Pantallas con bisel reducido</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Batería de larga duración</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth">
+                    <div class="flex items-center mb-4">
+                        <img src="src/assets/lenovo-logo.png" alt="Lenovo" class="h-10 w-10 mr-3">
+                        <h3 class="font-display font-semibold text-xl">Lenovo</h3>
+                    </div>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Teclado legendario ThinkPad</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Diseños convertibles 2 en 1</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Durabilidad militar certificada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Tecnología de refrigeración avanzada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Innovación constante en diseño</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth">
+                    <div class="flex items-center mb-4">
+                        <img src="src/assets/asus-logo.png" alt="ASUS" class="h-10 w-10 mr-3">
+                        <h3 class="font-display font-semibold text-xl">ASUS</h3>
+                    </div>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Tecnología gaming ROG avanzada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Diseños ultradelgados ZenBook</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Pantallas NanoEdge con alta relación pantalla-cuerpo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Audio certificado por Harman Kardon</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Rendimiento optimizado para creativos</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth">
+                    <div class="flex items-center mb-4">
+                        <img src="src/assets/msi-logo.png" alt="MSI" class="h-10 w-10 mr-3">
+                        <h3 class="font-display font-semibold text-xl">MSI</h3>
+                    </div>
+                    <ul class="space-y-3 text-muted-foreground">
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Rendimiento gaming extremo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Sistema de refrigeración Cooler Boost</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Pantallas de alta tasa de refresco</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Audio premium con Nahimic</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-accent mr-2">✓</span>
+                            <span>Diseño agresivo y iluminación RGB</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-hero text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">¿No encuentras tu marca ideal?</h2>
+                <p class="text-xl mb-8 text-white/90 leading-relaxed">
+                    Nuestros especialistas te ayudarán a elegir la laptop perfecta según tus necesidades y presupuesto.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg transition-smooth shadow-lg">
+                        Contactar a un Especialista
+                    </button>
+                    <button class="inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg border border-white/20 backdrop-blur-sm transition-smooth">
+                        Llamar Ahora
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-primary-foreground py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-display font-bold text-2xl mb-4">
+                        Control + <span class="text-accent">Tienda</span>
+                    </h3>
+                    <p class="text-sm opacity-80 mb-4">
+                        Tu destino para tecnología premium. Laptops de última generación para profesionales y entusiastas.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-accent transition-smooth">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-accent transition-smooth">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-accent transition-smooth">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-accent transition-smooth">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-4">Productos</h4>
+                    <ul class="space-y-2 text-sm opacity-80">
+                        <li><a href="laptops.html" class="hover:text-accent transition-smooth">Laptops</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Gaming</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Business</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Creadores</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Accesorios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-4">Soporte</h4>
+                    <ul class="space-y-2 text-sm opacity-80">
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Centro de Ayuda</a></li>
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Garantías</a></li>
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Devoluciones</a></li>
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Envíos</a></li>
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-4">Empresa</h4>
+                    <ul class="space-y-2 text-sm opacity-80">
+                        <li><a href="#" class="hover:text-accent transition-smooth">Sobre Nosotros</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Blog</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Carreras</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Prensa</a></li>
+                        <li><a href="marcas.html" class="hover:text-accent transition-smooth">Marcas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm opacity-70">
+                <p>&copy; 2024 Control + Tienda. Todos los derechos reservados.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-accent transition-smooth">Privacidad</a>
+                    <a href="#" class="hover:text-accent transition-smooth">Términos</a>
+                    <a href="#" class="hover:text-accent transition-smooth">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>

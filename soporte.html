@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte | Control + Tienda</title>
+    <meta name="description" content="Soporte técnico especializado para laptops y dispositivos tecnológicos. Asistencia 24/7, garantías y soluciones rápidas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        background: 'hsl(0 0% 100%)',
+                        foreground: 'hsl(215 25% 15%)',
+                        primary: {
+                            DEFAULT: 'hsl(215 85% 16%)',
+                            foreground: 'hsl(0 0% 100%)',
+                        },
+                        secondary: {
+                            DEFAULT: 'hsl(210 100% 97%)',
+                            foreground: 'hsl(215 85% 16%)',
+                        },
+                        accent: {
+                            DEFAULT: 'hsl(195 100% 50%)',
+                            foreground: 'hsl(0 0% 100%)',
+                        },
+                        muted: {
+                            DEFAULT: 'hsl(210 40% 96%)',
+                            foreground: 'hsl(215 16% 47%)',
+                        },
+                        border: 'hsl(215 20% 90%)',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: hsl(0 0% 100%);
+            color: hsl(215 25% 15%);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gradient-hero {
+            background: linear-gradient(135deg, hsl(215 85% 16%) 0%, hsl(215 70% 25%) 100%);
+        }
+
+        .shadow-card {
+            box-shadow: 0 4px 24px -2px hsl(215 25% 15% / 0.08);
+        }
+
+        .shadow-hover:hover {
+            box-shadow: 0 8px 32px -4px hsl(215 25% 15% / 0.12);
+        }
+
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion.active .accordion-content {
+            max-height: 500px;
+        }
+
+        .accordion.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-background border-b border-border">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="/" class="font-display font-bold text-2xl">
+                        Control + <span class="text-accent">Tienda</span>
+                    </a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="laptops.html" class="text-sm font-medium hover:text-accent transition-smooth">Laptops</a>
+                        <a href="#" class="text-sm font-medium hover:text-accent transition-smooth">Ofertas</a>
+                        <a href="marcas.html" class="text-sm font-medium hover:text-accent transition-smooth">Marcas</a>
+                        <a href="soporte.html" class="text-sm font-medium text-accent transition-smooth">Soporte</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="hidden md:inline-flex items-center justify-center h-10 px-4 text-sm font-medium hover:bg-muted rounded-md transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                    </button>
+                    <button class="hidden md:inline-flex items-center justify-center h-10 px-4 text-sm font-medium hover:bg-muted rounded-md transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="8" cy="21" r="1"></circle>
+                            <circle cx="19" cy="21" r="1"></circle>
+                            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+                        </svg>
+                    </button>
+                    <button id="mobile-menu-btn" class="md:hidden inline-flex items-center justify-center h-10 w-10 hover:bg-muted rounded-md transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" x2="20" y1="12" y2="12"></line>
+                            <line x1="4" x2="20" y1="6" y2="6"></line>
+                            <line x1="4" x2="20" y1="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="py-4 space-y-3">
+                    <a href="laptops.html" class="block px-4 py-2 text-sm font-medium hover:bg-muted rounded-md transition-smooth">Laptops</a>
+                    <a href="#" class="block px-4 py-2 text-sm font-medium hover:bg-muted rounded-md transition-smooth">Ofertas</a>
+                    <a href="#" class="block px-4 py-2 text-sm font-medium hover:bg-muted rounded-md transition-smooth">Marcas</a>
+                    <a href="soporte.html" class="block px-4 py-2 text-sm font-medium text-accent bg-muted rounded-md transition-smooth">Soporte</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 gradient-hero text-white overflow-hidden">
+        <div class="absolute inset-0 bg-[url('src/assets/support-hero.jpg')] bg-cover bg-center opacity-10"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <div class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6 border border-white/20">
+                    🤝 Soporte 24/7
+                </div>
+                <h1 class="text-5xl md:text-6xl font-display font-bold mb-6 leading-tight">
+                    Centro de <span class="text-accent">Soporte</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed">
+                    Estamos aquí para ayudarte con cualquier problema técnico. Encuentra soluciones rápidas o contacta con nuestro equipo especializado.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-accent/90 text-white font-semibold rounded-lg transition-smooth shadow-lg">
+                        Contactar Soporte
+                    </button>
+                    <button class="inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg border border-white/20 backdrop-blur-sm transition-smooth">
+                        Ver Guías
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Help Section -->
+    <section class="py-16 bg-background">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">¿En qué podemos ayudarte?</h2>
+                <p class="text-xl text-muted-foreground">Selecciona el tipo de asistencia que necesitas</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto group-hover:bg-accent/20 transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(195 100% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <line x1="10" y1="9" x2="8" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Garantías</h3>
+                    <p class="text-sm text-muted-foreground">Información sobre cobertura y procesos de garantía</p>
+                </div>
+
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto group-hover:bg-accent/20 transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(195 100% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Reparaciones</h3>
+                    <p class="text-sm text-muted-foreground">Solicitud y seguimiento de reparaciones técnicas</p>
+                </div>
+
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto group-hover:bg-accent/20 transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(195 100% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Preguntas Frecuentes</h3>
+                    <p class="text-sm text-muted-foreground">Respuestas a las dudas más comunes</p>
+                </div>
+
+                <div class="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-smooth text-center group cursor-pointer">
+                    <div class="h-16 w-16 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto group-hover:bg-accent/20 transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(195 100% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display font-semibold text-lg mb-2">Chat en Vivo</h3>
+                    <p class="text-sm text-muted-foreground">Asistencia inmediata con nuestro equipo</p>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto mb-16">
+                <div class="relative">
+                    <input type="text" placeholder="Buscar en el centro de ayuda..." class="w-full px-6 py-4 bg-muted border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-smooth">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-accent hover:bg-accent/90 text-white p-2 rounded-lg transition-smooth">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-muted">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">Preguntas Frecuentes</h2>
+                <p class="text-xl text-muted-foreground">Encuentra respuestas rápidas a las dudas más comunes</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ 1 -->
+                <div class="accordion bg-card rounded-xl shadow-card overflow-hidden transition-smooth">
+                    <button class="accordion-btn w-full px-6 py-4 text-left flex justify-between items-center hover:bg-muted/50 transition-smooth">
+                        <span class="font-display font-semibold text-lg">¿Cuál es el tiempo de garantía de los productos?</span>
+                        <svg class="accordion-icon w-5 h-5 text-muted-foreground transition-smooth" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-4 text-muted-foreground">
+                            <p>Todos nuestros productos incluyen una garantía de 2 años que cubre defectos de fabricación. Esta garantía incluye:</p>
+                            <ul class="mt-2 space-y-1 ml-4">
+                                <li>• Reparación o reemplazo de componentes defectuosos</li>
+                                <li>• Asistencia técnica especializada</li>
+                                <li>• Soporte telefónico y en línea 24/7</li>
+                                <li>• Recogida a domicilio para reparaciones (aplican condiciones)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="accordion bg-card rounded-xl shadow-card overflow-hidden transition-smooth">
+                    <button class="accordion-btn w-full px-6 py-4 text-left flex justify-between items-center hover:bg-muted/50 transition-smooth">
+                        <span class="font-display font-semibold text-lg">¿Cómo solicito una reparación bajo garantía?</span>
+                        <svg class="accordion-icon w-5 h-5 text-muted-foreground transition-smooth" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-4 text-muted-foreground">
+                            <p>Para solicitar una reparación bajo garantía, sigue estos pasos:</p>
+                            <ol class="mt-2 space-y-2 ml-4">
+                                <li>1. Contacta a nuestro centro de soporte por teléfono o chat en vivo</li>
+                                <li>2. Proporciona el número de serie de tu producto</li>
+                                <li>3. Describe el problema técnico que estás experimentando</li>
+                                <li>4. Nuestro equipo validará la cobertura de garantía</li>
+                                <li>5. Coordinaremos la recogida o te indicaremos el centro de servicio autorizado más cercano</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="accordion bg-card rounded-xl shadow-card overflow-hidden transition-smooth">
+                    <button class="accordion-btn w-full px-6 py-4 text-left flex justify-between items-center hover:bg-muted/50 transition-smooth">
+                        <span class="font-display font-semibold text-lg">¿Ofrecen soporte técnico remoto?</span>
+                        <svg class="accordion-icon w-5 h-5 text-muted-foreground transition-smooth" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-4 text-muted-foreground">
+                            <p>Sí, ofrecemos soporte técnico remoto para la mayoría de problemas de software y configuración. Nuestros técnicos pueden:</p>
+                            <ul class="mt-2 space-y-1 ml-4">
+                                <li>• Diagnosticar problemas de software de forma remota</li>
+                                <li>• Ayudar con la instalación y configuración de drivers</li>
+                                <li>• Optimizar el rendimiento de tu equipo</li>
+                                <li>• Resolver problemas de conectividad y red</li>
+                                <li>• Realizar mantenimiento preventivo del sistema</li>
+                            </ul>
+                            <p class="mt-2">Este servicio está disponible de lunes a domingo, de 8:00 AM a 10:00 PM.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="accordion bg-card rounded-xl shadow-card overflow-hidden transition-smooth">
+                    <button class="accordion-btn w-full px-6 py-4 text-left flex justify-between items-center hover:bg-muted/50 transition-smooth">
+                        <span class="font-display font-semibold text-lg">¿Cuánto tiempo toma una reparación promedio?</span>
+                        <svg class="accordion-icon w-5 h-5 text-muted-foreground transition-smooth" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-4 text-muted-foreground">
+                            <p>El tiempo de reparación varía según el tipo de problema:</p>
+                            <ul class="mt-2 space-y-2 ml-4">
+                                <li><strong>Reparaciones simples:</strong> 2-3 días hábiles (limpieza, software, actualizaciones)</li>
+                                <li><strong>Reparaciones de hardware:</strong> 5-7 días hábiles (pantallas, teclados, componentes)</li>
+                                <li><strong>Reparaciones complejas:</strong> 7-14 días hábiles (tarjetas madre, problemas eléctricos)</li>
+                                <li><strong>Garantía de fabricante:</strong> 10-15 días hábiles (envío a centro autorizado)</li>
+                            </ul>
+                            <p class="mt-2">Ofrecemos equipos de reemplazo para reparaciones que tomen más de 5 días hábiles (sujeto a disponibilidad).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="accordion bg-card rounded-xl shadow-card overflow-hidden transition-smooth">
+                    <button class="accordion-btn w-full px-6 py-4 text-left flex justify-between items-center hover:bg-muted/50 transition-smooth">
+                        <span class="font-display font-semibold text-lg">¿Qué debo hacer si mi laptop se sobrecalienta?</span>
+                        <svg class="accordion-icon w-5 h-5 text-muted-foreground transition-smooth" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-4 text-muted-foreground">
+                            <p>Si tu laptop se sobrecalienta, te recomendamos seguir estos pasos:</p>
+                            <ol class="mt-2 space-y-2 ml-4">
+                                <li>1. <strong>Verifica la ventilación:</strong> Asegúrate de que las rejillas de ventilación no estén obstruidas</li>
+                                <li>2. <strong>Usa una base refrigerante:</strong> Mejora la circulación de aire</li>
+                                <li>3. <strong>Limpia los ventiladores:</strong> Usa aire comprimido para eliminar el polvo</li>
+                                <li>4. <strong>Actualiza controladores:</strong> Asegúrate de tener los últimos drivers</li>
+                                <li>5. <strong>Controla procesos:</strong> Cierra aplicaciones que consuman muchos recursos</li>
+                            </ol>
+                            <p class="mt-2">Si el problema persiste, contacta a nuestro soporte técnico para una evaluación más profunda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 bg-background">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">¿No encuentras lo que buscas?</h2>
+                    <p class="text-xl text-muted-foreground">Contáctanos directamente y nuestro equipo te ayudará</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="text-center">
+                        <div class="h-14 w-14 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(195 100% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-semibold text-lg mb-2">Teléfono</h3>
+                        <p class="text-muted-foreground mb-2">Disponible 24/7</p>
+                        <a href="tel:+51987654321" class="text-accent font-semibold hover:underline">(01) 987-654-321</a>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="h-14 w-14 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(195 100% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-semibold text-lg mb-2">Email</h3>
+                        <p class="text-muted-foreground mb-2">Respuesta en 24h</p>
+                        <a href="mailto:soporte@controltienda.com" class="text-accent font-semibold hover:underline">soporte@controltienda.com</a>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="h-14 w-14 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(195 100% 50%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-semibold text-lg mb-2">Chat en Vivo</h3>
+                        <p class="text-muted-foreground mb-2">8:00 AM - 10:00 PM</p>
+                        <button class="text-accent font-semibold hover:underline">Iniciar Chat</button>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-card rounded-xl p-8 shadow-card">
+                    <h3 class="font-display font-semibold text-2xl mb-6">Envíanos un mensaje</h3>
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-2">Nombre completo</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-smooth" placeholder="Tu nombre">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-smooth" placeholder="tu@email.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="product" class="block text-sm font-medium mb-2">Producto</label>
+                            <select id="product" class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-smooth">
+                                <option value="">Selecciona un producto</option>
+                                <option value="gaming">Gaming Pro X1</option>
+                                <option value="ultrabook">UltraBook Elite</option>
+                                <option value="business">Business Pro 15</option>
+                                <option value="creator">Creator Studio</option>
+                                <option value="student">Student Essential</option>
+                                <option value="premium">Premium Ultra</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="issue" class="block text-sm font-medium mb-2">Tipo de problema</label>
+                            <select id="issue" class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-smooth">
+                                <option value="">Selecciona un tipo</option>
+                                <option value="hardware">Problema de hardware</option>
+                                <option value="software">Problema de software</option>
+                                <option value="warranty">Consulta de garantía</option>
+                                <option value="technical">Asesoría técnica</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-2">Mensaje</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-smooth" placeholder="Describe tu problema o consulta en detalle..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg transition-smooth shadow-lg">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-primary-foreground py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-display font-bold text-2xl mb-4">
+                        Control + <span class="text-accent">Tienda</span>
+                    </h3>
+                    <p class="text-sm opacity-80 mb-4">
+                        Tu destino para tecnología premium. Laptops de última generación para profesionales y entusiastas.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-accent transition-smooth">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-accent transition-smooth">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-accent transition-smooth">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="hover:text-accent transition-smooth">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-4">Productos</h4>
+                    <ul class="space-y-2 text-sm opacity-80">
+                        <li><a href="laptops.html" class="hover:text-accent transition-smooth">Laptops</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Gaming</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Business</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Creadores</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Accesorios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-4">Soporte</h4>
+                    <ul class="space-y-2 text-sm opacity-80">
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Centro de Ayuda</a></li>
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Garantías</a></li>
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Devoluciones</a></li>
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Envíos</a></li>
+                        <li><a href="soporte.html" class="hover:text-accent transition-smooth">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-lg mb-4">Empresa</h4>
+                    <ul class="space-y-2 text-sm opacity-80">
+                        <li><a href="#" class="hover:text-accent transition-smooth">Sobre Nosotros</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Blog</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Carreras</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Prensa</a></li>
+                        <li><a href="#" class="hover:text-accent transition-smooth">Socios</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center text-sm opacity-70">
+                <p>&copy; 2024 Control + Tienda. Todos los derechos reservados.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-accent transition-smooth">Privacidad</a>
+                    <a href="#" class="hover:text-accent transition-smooth">Términos</a>
+                    <a href="#" class="hover:text-accent transition-smooth">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // FAQ Accordion
+        const accordions = document.querySelectorAll('.accordion');
+        
+        accordions.forEach(accordion => {
+            const btn = accordion.querySelector('.accordion-btn');
+            
+            btn.addEventListener('click', () => {
+                // Close all other accordions
+                accordions.forEach(otherAccordion => {
+                    if (otherAccordion !== accordion) {
+                        otherAccordion.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current accordion
+                accordion.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
